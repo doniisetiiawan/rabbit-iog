@@ -1,0 +1,16 @@
+{
+  "name": "rabbit-iog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Doni Setiawan <donisetiawan.050@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "prettier": "^1.19.1"
+  },
+  "dependencies": {
+    "amqp": "^0.2.7"
+  }
+}
