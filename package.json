@@ -11,6 +11,8 @@
     "prettier": "^1.19.1"
   },
   "dependencies": {
-    "amqp": "^0.2.7"
+    "amqp": "^0.2.7",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
   }
 }
