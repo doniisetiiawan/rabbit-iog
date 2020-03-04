@@ -1,5 +1,6 @@
 const express = require('express');
 const amqp = require('amqp');
+let io = require('socket.io');
 
 const app = express();
 app.use(express.static(__dirname));
@@ -26,7 +27,41 @@ const startServer = (ex) => {
       },
     );
   });
-  app.listen(8002);
+  const server = app.listen(8002);
+
+  io = io.listen(server);
+
+  io.on('connection', (socket) => {
+    rabbit.queue(
+      socket.id,
+      { exclusive: true, autoDelete: true },
+      (q) => {
+        q.bind('credit_charge', q.name);
+
+        q.subscribe((message, { emitEvent }, delivery) => {
+          console.log(delivery);
+          socket.emit(emitEvent);
+        });
+
+        socket.on('charge', (data) => {
+          console.log(data);
+          ex.publish(
+            'charge',
+            { card: 'details' },
+            {
+              replyTo: q.name,
+              headers: { emitEvent: 'charged' },
+            },
+          );
+        });
+
+        socket.on('disconnect', () => {
+          q.destroy();
+          q.close();
+        });
+      },
+    );
+  });
 };
 
 rabbit.on('ready', () => {
