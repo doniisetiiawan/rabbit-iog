@@ -1,6 +1,6 @@
-const express = require('express');
-const amqp = require('amqp');
-let io = require('socket.io');
+import express from 'express';
+import amqp from 'amqp';
+import io from 'socket.io';
 
 const app = express();
 app.use(express.static(__dirname));

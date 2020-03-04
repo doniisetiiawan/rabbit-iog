@@ -1,5 +1,5 @@
-const http = require('http');
-const amqp = require('amqp');
+import http from 'http';
+import amqp from 'amqp';
 
 const startServer = (ex) => {
   const server = http.createServer(({ url }, res) => {

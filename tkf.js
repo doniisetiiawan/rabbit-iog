@@ -1,4 +1,4 @@
-const amqp = require('amqp');
+import amqp from 'amqp';
 
 const rabbit = amqp.createConnection();
 
